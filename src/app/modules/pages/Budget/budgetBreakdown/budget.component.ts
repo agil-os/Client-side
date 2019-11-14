@@ -409,7 +409,10 @@ export class BudgetComponent implements OnInit {
   }
 
   getPricesTotal() {
-    this.trips.total = this.prices.tripTotal.reduce((a, b) => a + b);
+    this.trips.total = this.prices.tripTotal.reduce((a, b) => {
+      console.log(a, b);
+      return a + b;
+    });
     return this.trips.total;
   }
 
@@ -542,7 +545,7 @@ export class BudgetComponent implements OnInit {
       this.prices['gas'] = data['gasPerGallon'].toFixed(2);
       this.prices['gasTotal'] = data['distancePrice'];
       this.trips['distance'] = data['distance'];
-      this.prices['tripTotal'].push(data['distancePrice']);
+      this.prices['tripTotal'].push(data['distancePrice'] * 2);
       this.getPricesTotal();
       this.lifecycle['transpo'] = true;
     });
